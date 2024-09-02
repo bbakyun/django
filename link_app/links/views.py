@@ -22,13 +22,15 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # NLTK 데이터 경로 설정
-nltk.data.path.append('/home/ubuntu/nltk_data')
+NLTK_DATA_PATH = '/home/ubuntu/nltk_data'
+if NLTK_DATA_PATH not in nltk.data.path:
+    nltk.data.path.append(NLTK_DATA_PATH)
 
 # nltk punkt tokenizer가 필요한 경우에만 다운로드
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt')
+    nltk.download('punkt', download_dir=NLTK_DATA_PATH)
 
 model_dir = "lcw99/t5-base-korean-text-summary"
 tokenizer_t5 = AutoTokenizer.from_pretrained(model_dir)
@@ -38,13 +40,8 @@ model_sbert = SentenceTransformer('sentence-transformers/xlm-r-100langs-bert-bas
 max_input_length = 512
 
 def keyword_func(doc, top_n, nr_candidates):
-    try:
-        okt = Okt()
-        tokenized_doc = okt.pos(doc)
-    except Exception as e:
-        logger.error(f"Error during Okt tokenization: {e}")
-        return ["직접 채워주세요"]  
-    
+    okt = Okt()
+    tokenized_doc = okt.pos(doc)
     tokenized_nouns = ' '.join([word[0] for word in tokenized_doc if word[1] == 'Noun'])
     
     if not tokenized_nouns.strip():
@@ -114,7 +111,7 @@ class LinkViewSet(viewsets.ModelViewSet):
         try:
             # URL과 사용자 UUID 조합이 이미 있는지 확인
             existing_link = Link.objects.filter(url=url, user_uuid=user_uuid).first()
-            if (existing_link):
+            if existing_link:
                 return Response({
                     'message': 'Link already exists!',
                     'link_id': existing_link.id,
