@@ -30,7 +30,7 @@ if NLTK_DATA_PATH not in nltk.data.path:
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt', download_dir=NLTK_DATA_PATH)
+    nltk.download('punkt')
 
 model_dir = "lcw99/t5-base-korean-text-summary"
 tokenizer_t5 = AutoTokenizer.from_pretrained(model_dir)
