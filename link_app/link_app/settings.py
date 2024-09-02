@@ -17,7 +17,8 @@ SECRET_KEY = 'django-insecure-z8uq2hh0)u^sv-4%fm0x(n=5_x$eq+t0)ab6!*_9kmtcfv(o5x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['3.38.102.38', 'localhost', '127.0.0.1', 'khuda-link-deploy.netlify.app']
+ALLOWED_HOSTS = ['3.38.102.38', '3.38.102.38.nip.io', 'www.3.38.102.38.nip.io', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
