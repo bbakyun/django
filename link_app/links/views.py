@@ -32,6 +32,12 @@ try:
 except LookupError:
     nltk.download('punkt')
 
+# punkt_tab tokenizer가 필요한 경우에만 다운로드
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab')
+
 model_dir = "lcw99/t5-base-korean-text-summary"
 tokenizer_t5 = AutoTokenizer.from_pretrained(model_dir)
 model_t5 = AutoModelForSeq2SeqLM.from_pretrained(model_dir, device_map="cpu")
