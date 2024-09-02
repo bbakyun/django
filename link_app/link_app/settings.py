@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['43.203.215.42', 'localhost', '127.0.0.1', '192.168.1.108','khuda-link-deploy.netlify.app']
+ALLOWED_HOSTS = ['3.38.102.38', 'localhost', '127.0.0.1', 'khuda-link-deploy.netlify.app']
 
 
 # Application definition
@@ -46,7 +46,6 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://192.168.1.108:3000",
     "https://khuda-link-deploy.netlify.app"  
 ]
 
